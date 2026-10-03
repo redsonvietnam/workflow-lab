@@ -1,0 +1,47 @@
+decision_id: META-WORKFLOW-LAB-001
+spec_version: V1
+spec_hash: pending
+
+question: >
+  Workflow 3-AI hiện tại nên được thiết kế lại thế nào để giảm
+  correlated reasoning, giảm semantic drift, tăng evidence independence
+  và giảm số vòng tranh luận, mà vẫn giữ human final control?
+
+chatgpt_verdict: CONDITIONAL
+claude_verdict: CONDITIONAL
+
+agreements:
+  - Raw artifacts > summaries for reviewer input
+  - Pre-registration + hash-freeze before execution
+  - Disagreement → experiment (bounded rounds, not infinite text)
+  - Executor emits artifacts, not conclusions
+  - Independent verifier (different code path) for headline metrics
+  - A/B test W1/W2/W3 with planted faults for objective comparison
+  - State machine: FRAME → PREREG → EXECUTE → VERIFY → REVIEW → DECIDE
+  - Roles: Architect (proposes), Executor (runs+artifacts), Verifier (recomputes), Critic (reads raw), Arbiter (human)
+  - Human gates at 3 points only: pre-experiment, post-validation, implementation transition
+
+disagreements:
+  - "Immutable" vs "versioned amendments with POST_HOC flag"
+  - Max 2 rounds — should be measured, not declared
+  - Blind-first cost/benefit — needs experiment
+
+evidence:
+  - id: claude-pass1
+    sha256: pending
+  - id: claude-pass2
+    sha256: pending
+  - id: chatgpt-pass1
+    sha256: pending
+  - id: chatgpt-pass2
+    sha256: pending
+
+tests_required:
+  - W1 vs W2 vs W3 on same meta-task with planted faults
+  - Measure: fault detection, false agreement, reproducibility, rounds, time
+  - Pre-register thresholds before running
+
+human_gate:
+  status: PENDING
+
+status: TESTING
